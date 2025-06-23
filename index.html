@@ -177,7 +177,7 @@
         <div class="d-flex gap-2">
             <div class="inline-input col-md-6" style="width: 100%;">
                 <span>श्री:</span>
-                <input style="width: 60%;" type="text" placeholder="ग्राहक नाव">
+                <input id="customerName" style="width: 60%;" type="text" placeholder="ग्राहक नाव">
             </div>
             <div class="inline-input col-md-6" style="width: 100%;">
                 <span>दिनांक:</span>
@@ -303,9 +303,21 @@
             const dateInput = document.getElementById('dateInput');
         });
 
+        // Set document title to customer name or "Order" before print/share
+        function setDocumentTitleForPrint() {
+            const name = document.getElementById('customerName').value.trim();
+            document.title = name ? name : 'Order';
+        }
+
         // Remove PDF/share logic, add print function
         document.getElementById('downloadPdfBtn').addEventListener('click', function () {
+            setDocumentTitleForPrint();
             window.print();
+        });
+
+        // Optional: Reset title after print (for user experience)
+        window.addEventListener('afterprint', function () {
+            document.title = 'के. के. कटर्स';
         });
     </script>
 
